@@ -18,3 +18,28 @@ def generate_password():
     '''
     Function that generates a password
     '''
+    def create_credential(uname, account, account_username, account_password):
+    '''
+    Function to create new credential
+    '''
+    new_credential = Credentials(uname, account, account_username, account_password)
+    return new_credential
+
+def save_credentials(credential):
+    '''
+    Function to save credentials
+    '''
+    credential.save_credential()
+
+def del_credential(Credential):
+    '''
+    Function to delete credential
+    '''
+    
+
+def display_credential():
+    '''
+    returns all the saved credentials
+    '''
+    return Credentials.display_credential()        
+        
