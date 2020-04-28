@@ -1,147 +1,122 @@
 #!/usr/bin/env python3.7
-from user import Users
+from user import User
+from credentials import Info
 
-def create_user(uname,password):
-    '''
-    Function to create a new user
-    '''
-    new_user = Users(uname,password)
+def create_account(f_name,m_name,e_mail):
+    new_user = User(f_name,m_name,e_mail)
     return new_user
-
-def save_users(user):
-    '''
-    Fuunction to save users
-    '''
+def create_credentials(face_bookp,e_mailp):
+    new_cred = Info(face_bookp,e_mailp)
+    return new_cred
+def save_account(user):
     user.save_user()
-
-def generate_password():
-    '''
-    Function that generates a password
-    '''
-    def create_credential(uname, account, account_username, account_password):
-    '''
-    Function to create new credential
-    '''
-    new_credential = Credentials(uname, account, account_username, account_password)
-    return new_credential
-
-def save_credentials(credential):
-    '''
-    Function to save credentials
-    '''
-    credential.save_credential()
-
-def del_credential(Credential):
-    '''
-    Function to delete credential
-    '''
-    
-
-def display_credential():
-    '''
-    returns all the saved credentials
-    '''
-    return Credentials.display_credential()  
-            
+def save_credentials(credentials):
+    credentials.save_info()
+def display_users():
+    return User.display_users()
+def display_creds():
+    return Info.display_info()
 def main():
-    print("Hello Welcome to your password locker.Please input your name...")
-    
-    user_name = input()
-    
-    print (f"Hello {user_name}. What would you like to do?")
-    print('\n')
-    
+    print(" ")
+ 
+    print("HELLO THERE  WELCOME TO YOUR PASSWORD MANAGER !!!")
+    print(" ")
+    print(" ")
     while True:
-        print("Use these short codes : ca -create an account, cc - create credentials, lg - log in to your account, dc - display credentials, ex - exit")
-        
-        short_code = input().lower()
-        
-        if short_code == "ca":
-            print("New Account")
-            print("-"*100)
-            
-            print("User name ....")
-            uname = input()
-            
-            print("password ....")
-            password = input()
-            
-            save_users(create_user(uname, password)) # create and save new user.
+        print("-" * 156)
+        print("""USE THE FOLLOWING SHORT CODES!!
+1. cc - CREATE NEW ACCOUNT
+2. ex - EXIT PASSWORD LOCKER
+3. dc - DISPLAY ACCOUNTS
+4. gp - GENERATE PASSWORDS""")
+
+
+        print(" ")
+        print("      TYPE IN A SHORT CODE!")
+        print(" ")
+        short_code = input() .lower()
+        if short_code =='cc':
+            print(" ")
+            print("-" * 156)
+            print("      CREATE A NEW ACCOUNT!")
+            print(" ")
+            print(" ")
+            print("what is your first name?..")
+            print(" ")
+            f_name =input()
+            print("What is your middle name?..")
+            print(" ")
+            m_name= input()
+            print("what is your email address?..")
+            print(" ")
+            e_mail= input()
+            print ("what is your facebook password?..")
+            print(" ")
+            face_bookp =input()
+            print("what is your email password?..")
+            print(" ")
+            e_mailp= input()
+            save_account(create_account(f_name,m_name,e_mail))
             print('\n')
-            print(f"New account: username is {uname} and the password is {password}")
+            save_credentials(create_credentials (face_bookp,e_mailp))
             print('\n')
-            
-        elif short_code == 'cc':
-            print("Create new account credentials")
-            print("-"*100)
-            
-            print("User name ....")
-            uname = input()
-            
-            print("Account name ....")
-            account = input()
-            
-            print("Account username .....")
-            account_username = input()
-            while True:
-                print(' ')
-                print("-"*60)
-                print('Please use the short codes to choose an option to set a password: ep-enter a password gp-generate a password ex-exit') 
-                psw_choice =input("Enter an option....")
-                print("-"*60)
-                if psw_choice == 'ep':
-                    print(" ")
-                    password =input("Enter your password.....")
-                    break
-                elif psw_choice == 'gp':
-                    password = generate_password()
-                    break
-                elif psw_choice == 'ex':
-                    break
-                else:
-                    print("please try again")
-            
-            save_credentials(create_credential(uname, account, account_username, password)) #create and save new credentials
+            print("-" * 156)
+            print(f"New Account  {f_name } { m_name} { face_bookp } has been created")
             print('\n')
-            print(f"New credentials for {uname} ,*{account}* account and the username for the account is *{account_username}* password **{password}**")
-            print('\n')
-            
-        elif short_code == 'lg':
-            print("-" *40)
-            print('')
-            print(f"Fill out your details to login to your account")  
-            print("User name ....")
-            uname = input()
-        
-            print("password ...")
-            password = input()
-            
-            for user in Users.user_list:
-                if user == uname:
-                    print("You are already registered")
-                else:
-                    print("You are already logged in to the account")
-                    break
+        elif short_code =='dc':
+            if display_users():
+                print(" ")
+                print("The user name")
+                print(" ")
                 print('\n')
-        elif short_code == 'dc':
-            print('')      
-            if display_credential():
-                print("Here is all your credentials list ;")    .lower().strip()
-                print(' ')
-                for credential in display_credential():
-                    print(f"Account name: {credential.account} , Account username: {credential.account_username} ,Password: {credential.password}")
-                print(' ')    
+                for user in display_users():
+                    print(f"{user.f_name}{user.m_name}")
+                for credentials in display_creds():
+                    print (f"{face_bookp}")
+                    print(" ")
+
             else:
-                print(' ')
-                print("There are no credentials saved")
-                print(' ') 
-                
-        elif short_code == 'ex':
-            print("Thank you for passing by see you again.......")
+                    print('\n')
+                    print("-" * 156)
+                    print(" ")
+                    print("                         PLEASE CREATE AN ACCOUNT ")
+                    print("                    You have not created an account yet :( ")
+                    print(" ")
+        elif  short_code == 'gp':
+            print(" ")
+            print(" ")
+            print("TO GENERATE A PASSWORD ADD IN YOUR FIRST NAME AND FACEBOOK BELOW!!")
+            print(" ")
+            list_of_inputs = [c for c in input()]
+
+            # list_of_inputs= list(list_of_inputs)
+            list_of_inputs.reverse()
+
+
+
+            print (list_of_inputs)
+
+
+
+
+
+
+        elif short_code == "ex":
+            print("-" * 156)
+            print(" ")
+            print("                        THANK YOU FOR DROPPING IN!")
+            print("                           Bye... Bye...")
+            print(" ")
+            print("-" * 156)
             break
         else:
-            print("Please use the short codes provided")             
-        
+            print("-" * 156)
+            print(" ")
+            print("                              RETRY!!")
+            print(" ")
+            print("                Please Select One Of The Options Provided")
+            print(" ")
+
 if __name__ == '__main__':
-    main()        
-        
+
+    main()
